@@ -1,0 +1,65 @@
+1.) Download and install latest MPLAB-X from microchip.com
+
+2.) Plug in your MPLAB ICD3 into USB port, and
+make sure drivers are installed. (they are included in
+the install package from step 1)
+
+3.) Plug the phone jack coming out of the ICD3 into the ICU6 board.
+
+4.) open up MPLAB IPE (Integrated Programming Environment)
+
+5.) Select Family: 16-bit DSCs (dspic33)
+
+6.) Select Device "dspic33ep256mu806"
+
+7.) Select your Tool: Should say something like ICD3 with a serial number
+
+8.) Click APPLY
+
+9.) Click Connect. It should say something like this:
+(But it might download new firmware first into the ICD3,
+it would do this only once)
+
+Connecting to MPLAB REAL ICE...
+
+Currently loaded firmware on REAL ICE
+Firmware Suite Version.....01.39.15
+Firmware type..............dsPIC33E/24E
+
+Target voltage detected
+Target device dsPIC33EP256MU806 found.
+Device ID Revision = 0x4002
+
+10.) CLICK BROWSE on the Source: line
+
+11.) Navigate to the folder with the firmware,
+and select the IRIS-SIX-BTI-ICU-6.production.hex file
+
+12.) It will say
+2016-10-27T22:20:15-0700- Loading hex file. Please wait...
+Loading code from C:\Users\Craig\Documents\GitHub\ICU6\Released Firmware\Rev 2\IRIS-SIX-BTI-ICU-6.production.hex...
+2016-10-27T22:20:16-0700- Hex file loaded successfully.
+
+13.) Press the PROGRAM button (it should say something like)
+2016-10-27T22:20:57-0700- Programming...
+
+The following memory area(s) will be programmed:
+program memory: start address = 0x0, end address = 0x41ff
+configuration memory
+
+Device Erased...
+
+Programming...
+Programming/Verify complete
+2016-10-27T22:21:03-0700- Programming complete
+Pass Count: 1
+
+
+14.) YOU MUST SEE THE PROGRAMMING/VERIFY COMPLETE.
+If not, then the device did not program succesfully.
+Call my cell phone 978-866-3069 if you have problems.
+
+Thanks,
+   Craig Beiferman
+
+
