@@ -127,12 +127,19 @@ namespace ICU6_SerialTester
             //Console.WriteLine(str); // richTextBox1.Text
         }
 
+        int state = 0;
+
+
+        private void resetStateMachine(  )
+        {
+            state = 0;
+        }
 
         private void serialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
             SerialPort sp = (SerialPort)sender;
             Task.Delay(200);
-            int state = 0;
+            
             int sensorNum = 0;
             int sensorVal = 0;
 
@@ -141,9 +148,13 @@ namespace ICU6_SerialTester
             for (int i=0;i<len;i++)
             {
                 int val = sp.ReadByte();
+
+                // always reset state machine on a C5, should never receive otherwise
+                if (val == 0xC5) state = 0; 
                
                 AddStringToTextBox("[0x"+val.ToString("X")+"]");
 
+               // AddStringToTextBox("[S:" + state.ToString() + "]");
                 switch (state)
                 {
                     case 0:
@@ -201,10 +212,10 @@ namespace ICU6_SerialTester
                                 AddStringToTextBox(" MCLR Reset");
                                 break;
                             default: // unknown
-                                AddStringToTextBox(" Unknown Reset");
-                                state = 0;
+                                AddStringToTextBox(" Unknown Reset");                               
                                 break;
-                        }                        
+                        }
+                        state = 0;
                         break;
                     case 7: // hearbeat response
                         SetNumberSensors(val);
@@ -297,6 +308,8 @@ namespace ICU6_SerialTester
         private void buttonReset_Click(object sender, EventArgs e)
         {
             byte[] buff = { 0xF1 };
+            resetStateMachine();
+
             this.serialPort1.Write(buff, 0, 1);
 
             sensor1.Reset();
