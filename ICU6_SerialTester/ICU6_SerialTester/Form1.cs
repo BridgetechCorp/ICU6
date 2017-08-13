@@ -10,12 +10,14 @@ using System.Windows.Forms;
 
 using System.IO.Ports;
 
+using System.IO;
+
 
 namespace ICU6_SerialTester
 {
     public partial class Form1 : Form
     {
-        delegate void SetTextCallback( string str );
+        delegate void SetTextCallback( string str);
 
         public void SetText( string text)
         {
@@ -99,6 +101,9 @@ namespace ICU6_SerialTester
                         AddStringToTextBox("[Sensor 6 OUT]");
                         sensor6.IncrementOutCount();
                         break;
+                    default:
+                        AddStringToTextBox("[ERROR UNKNOWN SENSOR NUMBER]");
+                        break;
                 }
             }
         }
@@ -109,7 +114,7 @@ namespace ICU6_SerialTester
            // Console.WriteLine(val.ToString()+" Sensors Found"); // richTextBox1.Text
         }
 
-        void SetDebugModeOn( )
+        void SetDebugModeOn(  )
         {
             SetText("Debug Mode ON");
             //Console.WriteLine("Debug Mode ON"); // richTextBox1.Text
@@ -121,11 +126,7 @@ namespace ICU6_SerialTester
             //Console.WriteLine(val.ToString() + " Error Code"); // richTextBox1.Text
         }
 
-        void AddStringToTextBox( string str )
-        {
-            SetText(str);
-            //Console.WriteLine(str); // richTextBox1.Text
-        }
+    
 
         int state = 0;
 
@@ -135,106 +136,165 @@ namespace ICU6_SerialTester
             state = 0;
         }
 
-        private void serialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+        public void LogStart(string logMessage)
         {
-            SerialPort sp = (SerialPort)sender;
-            Task.Delay(200);
-            
-            int sensorNum = 0;
-            int sensorVal = 0;
-
-            int len = sp.BytesToRead;
-
-            for (int i=0;i<len;i++)
+            String filename = textBox1.Text;
+            if (!checkBoxSaveToLogFile.Checked) return;
+            using (StreamWriter w = File.AppendText(filename))
             {
-                int val = sp.ReadByte();
+                w.Write("\r\nLog Entry : ");
+                w.WriteLine("{0} {1} {2}", DateTime.Now.ToLongTimeString(),
+                    DateTime.Now.ToLongDateString(), logMessage);
+            }       
+        }
 
-                // always reset state machine on a C5, should never receive otherwise
-                if (val == 0xC5) state = 0; 
-               
-                AddStringToTextBox("[0x"+val.ToString("X")+"]");
+        public void Log(string logMessage)
+        {
+            String filename = textBox1.Text;
+            if (!checkBoxSaveToLogFile.Checked) return;
+            using (StreamWriter w = File.AppendText(filename))
+            {
+                w.Write("{0}", logMessage);
+            }       
+        }
 
-               // AddStringToTextBox("[S:" + state.ToString() + "]");
-                switch (state)
-                {
-                    case 0:
-                        if (val == 0xC5) state = 1;
-                        break;
-                    case 1:
-                        if (val == 0xFF) state = 2; else state = 0;
-                        break;
-                    case 2:
-                        if (val == 0xBF)
-                            state = 3;
-                        else if (val == 0xC5)
-                            state = 1;
-                        else if (val == 0xDD)
-                            state = 5;
-                        else
-                            state = 0;
-                        break;
-                    case 3:
-                        sensorNum = val; 
-                        state = 4;
-                        break;
-                    case 4:
-                        sensorVal = val;
-                        if (sensorVal > 0)
-                            HandleSensorUpdate(sensorNum, sensorVal);
-                        state = 2;
-                        break;
-                    case 5: // DEBUG case
-                        if (val == 0xB0)  // bootup
-                            state = 6;
-                        else if (val == 0xBE) // hearbeat response
-                            state = 7;
-                        else if (val == 0xDE) // debug mode on response
-                            state = 8;
-                        else if (val == 0xEE) // error message
-                            state = 9;
-                        break;
-                    case 6: // handle bootup message
-                        switch(val)
-                        {
-                            case 0: // software reset
-                                AddStringToTextBox(" Software Reset");
-                                break;
-                            case 1: // brownout
-                                AddStringToTextBox(" BROWNOUT");
-                                break;
-                            case 2: // watchdog timeout
-                                AddStringToTextBox(" Watchdog Timeout");
-                                break;
-                            case 3: // power on reset
-                                AddStringToTextBox(" Power On Reset");
-                                break;
-                            case 4: // MCLR reset
-                                AddStringToTextBox(" MCLR Reset");
-                                break;
-                            default: // unknown
-                                AddStringToTextBox(" Unknown Reset");                               
-                                break;
-                        }
-                        state = 0;
-                        break;
-                    case 7: // hearbeat response
-                        SetNumberSensors(val);
-                        state = 0;
-                        break;
-                    case 8: // debug mode on response
-                        SetDebugModeOn();
-                        state = 0;
-                        break;
-                    case 9: // error message
-                        SetErrorCode(val);
-                        state = 0;
-                        break;
-                    default:
-                        state = 0;
-                        break;
-                }               
+        public void LogEnd(  )
+        {
+            String filename = textBox1.Text;
+            if (!checkBoxSaveToLogFile.Checked) return;
+            using (StreamWriter w = File.AppendText(filename))
+            {          
+                w.WriteLine("\r\nSENSOR #1:IN:{0}:OUT:{1}", sensor1.InCount,sensor1.OutCount);
+                w.WriteLine("SENSOR #2:IN:{0}:OUT:{1}", sensor2.InCount, sensor2.OutCount);
+                w.WriteLine("SENSOR #3:IN:{0}:OUT:{1}", sensor3.InCount, sensor3.OutCount);
+                w.WriteLine("SENSOR #4:IN:{0}:OUT:{1}", sensor4.InCount, sensor4.OutCount);
+                w.WriteLine("SENSOR #5:IN:{0}:OUT:{1}", sensor5.InCount, sensor5.OutCount);
+                w.WriteLine("SENSOR #6:IN:{0}:OUT:{1}", sensor6.InCount, sensor6.OutCount);
             }
-            AddStringToTextBox("\n");
+        }
+
+        void AddStringToTextBox(string str)
+        {
+            SetText(str);
+            Log(str);            
+        }
+
+
+        private void serialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+        {                                   
+                SerialPort sp = (SerialPort)sender;
+                Task.Delay(200);
+
+                int sensorNum = 0;
+                int sensorVal = 0;
+
+                int len = sp.BytesToRead;
+
+                LogStart("Received " + len + "bytes");
+
+                for (int i = 0; i < len; i++)
+                {
+                    int val = sp.ReadByte();
+                  
+
+                    // always reset state machine on a C5, should never receive otherwise
+                    if (val == 0xC5) state = 0;
+
+                    AddStringToTextBox("[0x" + val.ToString("X") + "]");
+
+                    // AddStringToTextBox("[S:" + state.ToString() + "]");
+                    switch (state)
+                    {
+                        case 0:
+                            if (val == 0xC5)
+                                state = 1;
+                            else
+                                AddStringToTextBox(" [expected 0xC5]");
+                            break;
+                        case 1:
+                            if (val == 0xFF) state = 2;
+                            else
+                            {
+                                state = 0;
+                                AddStringToTextBox(" [EXPECTED 0xFF]");
+                            }
+                            break;
+                        case 2:
+                            if (val == 0xBF)
+                                state = 3;
+                            else if (val == 0xC5)
+                                state = 1;
+                            else if (val == 0xDD)
+                                state = 5;
+                            else
+                            {
+                                AddStringToTextBox(" [EXPECTED 0xBF,0xC5, or 0xDD]");
+                                state = 0;
+                            }
+                            break;
+                        case 3:
+                            sensorNum = val;
+                            state = 4;
+                            break;
+                        case 4:
+                            sensorVal = val;
+                            if (sensorVal > 0)
+                                HandleSensorUpdate(sensorNum, sensorVal);
+                            state = 2;
+                            break;
+                        case 5: // DEBUG case
+                            if (val == 0xB0)  // bootup
+                                state = 6;
+                            else if (val == 0xBE) // hearbeat response
+                                state = 7;
+                            else if (val == 0xDE) // debug mode on response
+                                state = 8;
+                            else if (val == 0xEE) // error message
+                                state = 9;
+                            break;
+                        case 6: // handle bootup message
+                            switch (val)
+                            {
+                                case 0: // software reset
+                                    AddStringToTextBox(" Software Reset");
+                                    break;
+                                case 1: // brownout
+                                    AddStringToTextBox(" BROWNOUT");
+                                    break;
+                                case 2: // watchdog timeout
+                                    AddStringToTextBox(" Watchdog Timeout");
+                                    break;
+                                case 3: // power on reset
+                                    AddStringToTextBox(" Power On Reset");
+                                    break;
+                                case 4: // MCLR reset
+                                    AddStringToTextBox(" MCLR Reset");
+                                    break;
+                                default: // unknown
+                                    AddStringToTextBox(" Unknown Reset");
+                                    break;
+                            }
+                            state = 0;
+                            break;
+                        case 7: // hearbeat response
+                            SetNumberSensors(val);
+                            state = 0;
+                            break;
+                        case 8: // debug mode on response
+                            SetDebugModeOn();
+                            state = 0;
+                            break;
+                        case 9: // error message
+                            SetErrorCode(val);
+                            state = 0;
+                            break;
+                        default:
+                            state = 0;
+                            break;
+                    }
+                }
+                AddStringToTextBox("\n");
+                LogEnd();
         }
 
         private void serialPort1_ErrorReceived(object sender, System.IO.Ports.SerialErrorReceivedEventArgs e)
@@ -335,6 +395,13 @@ namespace ICU6_SerialTester
             richTextBox1.SelectionStart = richTextBox1.Text.Length;
             // scroll it automatically
             richTextBox1.ScrollToCaret();
-        }    
+        }
+
+        private void buttonSetFilename_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.ShowDialog();
+            textBox1.Text = saveFileDialog1.FileName;
+            checkBoxSaveToLogFile.Checked = true;
+        }
     }
 }
