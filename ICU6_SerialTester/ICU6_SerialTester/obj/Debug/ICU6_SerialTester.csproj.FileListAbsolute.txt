@@ -1,10 +1,11 @@
 C:\work\ICU6\ICU6_SerialTester\ICU6_SerialTester\bin\Debug\ICU6_SerialTester.exe.config
 C:\work\ICU6\ICU6_SerialTester\ICU6_SerialTester\bin\Debug\ICU6_SerialTester.exe
 C:\work\ICU6\ICU6_SerialTester\ICU6_SerialTester\bin\Debug\ICU6_SerialTester.pdb
-C:\work\ICU6\ICU6_SerialTester\ICU6_SerialTester\obj\Debug\ICU6_SerialTester.csprojResolveAssemblyReference.cache
 C:\work\ICU6\ICU6_SerialTester\ICU6_SerialTester\obj\Debug\ICU6_SerialTester.Properties.Resources.resources
 C:\work\ICU6\ICU6_SerialTester\ICU6_SerialTester\obj\Debug\ICU6_SerialTester.csproj.GenerateResource.Cache
 C:\work\ICU6\ICU6_SerialTester\ICU6_SerialTester\obj\Debug\ICU6_SerialTester.exe
 C:\work\ICU6\ICU6_SerialTester\ICU6_SerialTester\obj\Debug\ICU6_SerialTester.pdb
 C:\work\ICU6\ICU6_SerialTester\ICU6_SerialTester\obj\Debug\ICU6_SerialTester.Form1.resources
 C:\work\ICU6\ICU6_SerialTester\ICU6_SerialTester\obj\Debug\ICU6_SerialTester.Sensor.resources
+C:\work\ICU6\ICU6_SerialTester\ICU6_SerialTester\obj\Debug\ICU6_SerialTester.csprojAssemblyReference.cache
+C:\work\ICU6\ICU6_SerialTester\ICU6_SerialTester\obj\Debug\ICU6_SerialTester.csproj.CoreCompileInputs.cache

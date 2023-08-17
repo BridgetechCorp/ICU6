@@ -105,4 +105,7 @@
 
 extern int system_disi_level;
 
+void dprint(char * str);
+void dprintchar(char c);
+
 #endif // Sent

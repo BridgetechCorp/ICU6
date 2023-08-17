@@ -88,7 +88,7 @@ void initECAN(void)
   //	unsigned int test;
   //	unsigned int dorr;
   //   unsigned int *ptr;
-
+  
   // !! chip errata fix !! for silicon rev B1
   // Elevate priority of DMA to avoid lost can RX interrupts. 
   MSTRPR = 0x20;
@@ -279,8 +279,12 @@ void rxECAN( int bufidx )
   else
   {
     canmsg.id = ((unsigned long)(temp & 0x1FFC)) << 16;
-    canmsg.id += (readEds( &ecan1msgBuf[bufidx][1] ) & 0x0FFF) << 6;
-    canmsg.id += (readEds( &ecan1msgBuf[bufidx][2] ) & 0xFC00) >> 10;
+    //canmsg.id += (readEds( &ecan1msgBuf[bufidx][1] ) & 0x0FFF) << 6;
+   // canmsg.id += (readEds( &ecan1msgBuf[bufidx][2] ) & 0xFC00) >> 10;
+    
+    canmsg.id += ((unsigned long)(readEds( &ecan1msgBuf[bufidx][1] ) & 0x0FFF)) << 6;
+    canmsg.id += ((unsigned long)(readEds( &ecan1msgBuf[bufidx][2] ) & 0xFC00)) >> 10;
+    
     canmsg.frame_type=CAN_FRAME_EXT;
   }
   /* check to see what type of message it is */
@@ -714,7 +718,7 @@ void SendCanMessage( long id, char *data, int datalen )
     {
       // this is not good, we have been in this loop for 100000 cycles,
       // let's leave and turn off motor because the CAN bus must be stuck somehow
-      C1TR01CONbits.TXREQ0==0; // Not sure if this works to stop transmit.
+      C1TR01CONbits.TXREQ0=0; // Not sure if this works to stop transmit.
 
       AddErrorCode(CAN_TX_TIMEOUT);      
       return;

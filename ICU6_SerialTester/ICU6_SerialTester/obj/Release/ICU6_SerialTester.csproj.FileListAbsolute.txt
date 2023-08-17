@@ -7,3 +7,5 @@ C:\work\ICU6\ICU6_SerialTester\ICU6_SerialTester\obj\Release\ICU6_SerialTester.S
 C:\work\ICU6\ICU6_SerialTester\ICU6_SerialTester\obj\Release\ICU6_SerialTester.csproj.GenerateResource.Cache
 C:\work\ICU6\ICU6_SerialTester\ICU6_SerialTester\obj\Release\ICU6_SerialTester.exe
 C:\work\ICU6\ICU6_SerialTester\ICU6_SerialTester\obj\Release\ICU6_SerialTester.pdb
+C:\work\ICU6\ICU6_SerialTester\ICU6_SerialTester\obj\Release\ICU6_SerialTester.csprojAssemblyReference.cache
+C:\work\ICU6\ICU6_SerialTester\ICU6_SerialTester\obj\Release\ICU6_SerialTester.csproj.CoreCompileInputs.cache

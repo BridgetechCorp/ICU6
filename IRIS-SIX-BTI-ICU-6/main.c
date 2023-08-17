@@ -16,6 +16,7 @@
 #include <string.h>
 #include <stdint.h>        /* Includes uint16_t definition                    */
 #include <stdbool.h>       /* Includes true/false definition                  */
+#include <stdio.h>
 
 #include "system.h"        /* System funct/params, like osc/peripheral config */
 #include "user.h"          /* User funct/params, such as InitApp              */
@@ -93,7 +94,7 @@ mID txMessage;
 
 #define MAX_SENSORS  8
 
-bool DebugMode = FALSE;
+bool DebugMode = FALSE; // TODO: SET BACK TO FALSE
 
 int timeout;
 int SensorCount = 0;
@@ -125,7 +126,7 @@ int (*RunLevel5Main)(void);
 void InitGlobalVariables()
 {
     int i;
-   
+    dprint("INIT VARIABLES\n");
     SensorCount = 0;
     LostSensor = false;    
     NeedToSendData = false;
@@ -165,12 +166,28 @@ int GetCanIndex( void )
     return 0; // give something valid if we have nothing
 }
 
+void ShowCanMessage(mID messageType)
+{
+    int i,index = 0;
+   // char buffer[80];
+    
+    index = messageType.data[0];
+    //sprintf(buffer,"rcvd IDX:%d\n",index);
+    
+    //dprint(buffer);
+    for (i=0;i<messageType.data_length;i++)
+    {
+        dprintchar(messageType.data[i]);
+    }
+}
+
 
 int process_can_message(mID messageType)
 {  // Accepts a CAN message from the PC and organizes it for the slave to read/write
    // copy the message based on first byte in data.
   int index = 0;
   
+  //ShowCanMessage(messageType); 
   index = messageType.data[0];
   if (index < MAX_MESSAGES )
   { 
@@ -211,7 +228,7 @@ int RunLevel5MainFunc(void);
 
 unsigned long GetCANAddressFromBuffer( void )
 {  
-   return (unsigned long) messages[1].id & 0x000FFFFF;
+   return (unsigned long) messages[1].id & 0x0007FFFF; // 19 bits
 }
 
 void FlushCanMessages( void )
@@ -244,6 +261,7 @@ void ReadCount( int readcmd )
 {
 //    static boolean MsgFlop = false;
     int k;//,j;
+    char buffer[40];
    // int functionArea;
     
  // Check to see if a status message arrived, but no status is available
@@ -274,6 +292,8 @@ void ReadCount( int readcmd )
                {
                   SensorAddr[k] = sensorCanAddress;
                   FuncArea[k] = 0;
+                  sprintf(buffer,"FOUND SENSOR %d can addr=%lx\r\n",k,SensorAddr[k] ); 
+                  dprint(buffer);
                   return;
                }
            }
@@ -284,6 +304,9 @@ void ReadCount( int readcmd )
        {
          // Door State Count Message (who requested this?)
             // this is sent when DoorOpen and DoorClose are requested
+           k = 44;
+           sprintf(buffer,"DOOR STATUS %d addr=%lx\r\n",messages[1].data[7],GetCANAddressFromBuffer() ); 
+           dprint(buffer);
        }
        else if  ((messages[1].data[4] == 'C') &&
                  (messages[1].data[5] == 0x60) &&
@@ -330,7 +353,8 @@ void ReadCount( int readcmd )
                (messages[1].data[6] == 'G') )
            {               
                FuncArea[GetCanIndex()] = messages[2].data[1]; 
-                         
+               sprintf(buffer,"FUNC AREA STATUS %d addr=%lx\r\n",FuncArea[GetCanIndex()],GetCANAddressFromBuffer() ); 
+               dprint(buffer);          
            }
            else
            {
@@ -349,6 +373,7 @@ void ReadCount( int readcmd )
             // CMB: this next line is a test
             if ( FuncArea[k]==0 )
             {
+                //dprint("func area k was 0\n"); 
                 FuncArea[k] = messages[1].data[7]; 
             }
                        
@@ -476,6 +501,8 @@ void EstablishCanModuleConnections( void )
     int index = GetCanAddrIndex(addr);
     int fa=0;
     
+    
+    
     // scan all function areas looking for a valid response to
     // establish which function area the sensor is on.
     while (FuncArea[index] == 0)
@@ -556,11 +583,35 @@ void ReadAllDoorCounts( void )
 void GetAllFunctionAreas( void )
 {
     int addr;
+         
     for (addr=0;addr<MAX_SENSORS;addr++)
     {
         if (SensorAddr[addr] != 0)
         {          
-            FuncArea[addr] = GetFunctionArea(SensorAddr[addr]);
+            FuncArea[addr] = GetFunctionArea(SensorAddr[addr]);            
+        }              
+    }  
+}
+
+   
+void ShowData( void )
+{
+    int addr;
+    char buffer[100];
+     
+    for (addr=0;addr<MAX_SENSORS;addr++)
+    {
+        if (SensorAddr[addr] != 0)
+        {                     
+            sprintf(buffer,"idx=%d addr=%lx fa=%d in=%d out=%d status=%d sabotage=%d\r\n",
+                    addr,
+                    SensorAddr[addr],
+                    FuncArea[addr],
+                    PeopleCountIn[addr],
+                    PeopleCountOut[addr],
+                    SensorStatus[addr],
+                    Sabotaged[addr] ); 
+            dprint(buffer);
         }              
     }  
 }
@@ -771,6 +822,26 @@ void SendErrorCode( unsigned char code )
   while (GetWaitDelay()!=0);
 }
 
+void dprint(char * str)
+{
+  if (DebugMode)
+  {
+    while (*str!=0)
+      {
+          putch(*str++);       
+      } 
+  }
+}
+
+void dprintchar(char c)
+{
+ if (DebugMode)
+  {
+    putch(c); 
+  }
+}
+
+
 void SendDebugMessage( char * str)
 {
   if (DebugMode)
@@ -813,6 +884,10 @@ int16_t main(void)
     /* Initialize IO ports and peripherals */
     InitApp();
   
+   // putch(0x55);
+   //  putch(0x55);
+   //  putch(0x55);
+    
     
     // give time for sensors to come on line
     for (k=0;k<20;k++)
@@ -851,10 +926,14 @@ int16_t main(void)
     
       
     
+    
+    
     // tell server that we booted up with reason
     SendBootupMessage();
      
    accumulatedTime = 0; 
+   dprint("STARTING UP\n");
+   SendHeartBeat();
    while (true)     
    {      
        ClrWdt(); // kick the watchdog timer
@@ -866,18 +945,54 @@ int16_t main(void)
            switch ((unsigned char)c)
            {
                case 0xf1:
+               case 'r':
+                   dprint("RESET\n");
                    // A request to reboot the microcontroller from server
                    asm("reset"); // reset the processor
                    break;
                case 0xf2:
+               case 'h':
+                   dprint("HEARTBEAT\n");
                    // Heartbeat request from server
                    SendHeartBeat();
                    break;
                case 0xf3:
-                   // request from server to turn debug mode on
-                   DebugMode = true;
+               case 'd':
+                   // request from server to turn debug mode on                  
+                   if (DebugMode)
+                   {                                       
+                        dprint("DEBUG MODE OFF\n");
+                        DebugMode = FALSE; 
+                   }
+                   else
+                   {
+                        DebugMode = TRUE;                  
+                        dprint("DEBUG MODE ON\n");  
+                   }
                    SendDebugOnResponse();
-                   break;               
+                   break; 
+               case 'o':
+                   dprint("OPEN ALL DOORS\n");
+                   OpenAllDoors();
+                   break;
+               case 'c':
+                   dprint("CLOSE ALL DOORS\n");
+                   CloseAllDoors();
+                   break;
+               case 's':
+                   dprint("Show Data\n");
+                   ShowData();                   
+                   break;
+               case '?':
+                   DebugMode = TRUE; 
+                   dprint("0xf1 or r - reset processor\n");
+                   dprint("0xf2 or h - send heartbeat\n");
+                   dprint("0xf3 or d - toggle debug mode\n");
+                   dprint("d - toggle debug mode\n");
+                   dprint("o - open doors\n");
+                   dprint("c - close doors\n");
+                   dprint("s - show all data\n");
+                   break;
                default:
                    SendErrorCode(2); // unknown command code
                    break;               

@@ -1,0 +1,240 @@
+
+Log Entry : 12:13:20 PM Sunday, August 13, 2017 Received 6bytes
+[0x78] [expected 0xC5][0x76] [expected 0xC5][0x76] [expected 0xC5][0x78] [expected 0xC5][0x63] [expected 0xC5][0x76] [expected 0xC5]
+
+SENSOR #1:IN:0:OUT:0
+SENSOR #2:IN:0:OUT:0
+SENSOR #3:IN:0:OUT:0
+SENSOR #4:IN:0:OUT:0
+SENSOR #5:IN:0:OUT:0
+SENSOR #6:IN:0:OUT:0
+
+Log Entry : 12:13:27 PM Sunday, August 13, 2017 Received 6bytes
+[0x78] [expected 0xC5][0x76] [expected 0xC5][0x76] [expected 0xC5][0x78] [expected 0xC5][0x63] [expected 0xC5][0x76] [expected 0xC5]
+
+SENSOR #1:IN:0:OUT:0
+SENSOR #2:IN:0:OUT:0
+SENSOR #3:IN:0:OUT:0
+SENSOR #4:IN:0:OUT:0
+SENSOR #5:IN:0:OUT:0
+SENSOR #6:IN:0:OUT:0
+
+Log Entry : 12:13:28 PM Sunday, August 13, 2017 Received 2bytes
+[0x78] [expected 0xC5][0x76] [expected 0xC5]
+
+SENSOR #1:IN:0:OUT:0
+SENSOR #2:IN:0:OUT:0
+SENSOR #3:IN:0:OUT:0
+SENSOR #4:IN:0:OUT:0
+SENSOR #5:IN:0:OUT:0
+SENSOR #6:IN:0:OUT:0
+
+Log Entry : 12:13:28 PM Sunday, August 13, 2017 Received 4bytes
+[0x76] [expected 0xC5][0x78] [expected 0xC5][0x63] [expected 0xC5][0x76] [expected 0xC5]
+
+SENSOR #1:IN:0:OUT:0
+SENSOR #2:IN:0:OUT:0
+SENSOR #3:IN:0:OUT:0
+SENSOR #4:IN:0:OUT:0
+SENSOR #5:IN:0:OUT:0
+SENSOR #6:IN:0:OUT:0
+
+Log Entry : 12:13:28 PM Sunday, August 13, 2017 Received 4bytes
+[0x78] [expected 0xC5][0x76] [expected 0xC5][0x76] [expected 0xC5][0x78] [expected 0xC5]
+
+SENSOR #1:IN:0:OUT:0
+SENSOR #2:IN:0:OUT:0
+SENSOR #3:IN:0:OUT:0
+SENSOR #4:IN:0:OUT:0
+SENSOR #5:IN:0:OUT:0
+SENSOR #6:IN:0:OUT:0
+
+Log Entry : 12:13:28 PM Sunday, August 13, 2017 Received 2bytes
+[0x63] [expected 0xC5][0x76] [expected 0xC5]
+
+SENSOR #1:IN:0:OUT:0
+SENSOR #2:IN:0:OUT:0
+SENSOR #3:IN:0:OUT:0
+SENSOR #4:IN:0:OUT:0
+SENSOR #5:IN:0:OUT:0
+SENSOR #6:IN:0:OUT:0
+
+Log Entry : 12:13:29 PM Sunday, August 13, 2017 Received 3bytes
+[0x78] [expected 0xC5][0x76] [expected 0xC5][0x76] [expected 0xC5]
+
+SENSOR #1:IN:0:OUT:0
+SENSOR #2:IN:0:OUT:0
+SENSOR #3:IN:0:OUT:0
+SENSOR #4:IN:0:OUT:0
+SENSOR #5:IN:0:OUT:0
+SENSOR #6:IN:0:OUT:0
+
+Log Entry : 12:13:29 PM Sunday, August 13, 2017 Received 3bytes
+[0x78] [expected 0xC5][0x63] [expected 0xC5][0x76] [expected 0xC5]
+
+SENSOR #1:IN:0:OUT:0
+SENSOR #2:IN:0:OUT:0
+SENSOR #3:IN:0:OUT:0
+SENSOR #4:IN:0:OUT:0
+SENSOR #5:IN:0:OUT:0
+SENSOR #6:IN:0:OUT:0
+
+Log Entry : 12:13:29 PM Sunday, August 13, 2017 Received 2bytes
+[0x78] [expected 0xC5][0x76] [expected 0xC5]
+
+SENSOR #1:IN:0:OUT:0
+SENSOR #2:IN:0:OUT:0
+SENSOR #3:IN:0:OUT:0
+SENSOR #4:IN:0:OUT:0
+SENSOR #5:IN:0:OUT:0
+SENSOR #6:IN:0:OUT:0
+
+Log Entry : 12:13:29 PM Sunday, August 13, 2017 Received 4bytes
+[0x76] [expected 0xC5][0x78] [expected 0xC5][0x63] [expected 0xC5][0x76] [expected 0xC5]
+
+SENSOR #1:IN:0:OUT:0
+SENSOR #2:IN:0:OUT:0
+SENSOR #3:IN:0:OUT:0
+SENSOR #4:IN:0:OUT:0
+SENSOR #5:IN:0:OUT:0
+SENSOR #6:IN:0:OUT:0
+
+Log Entry : 12:13:29 PM Sunday, August 13, 2017 Received 2bytes
+[0x78] [expected 0xC5][0x76] [expected 0xC5]
+
+SENSOR #1:IN:0:OUT:0
+SENSOR #2:IN:0:OUT:0
+SENSOR #3:IN:0:OUT:0
+SENSOR #4:IN:0:OUT:0
+SENSOR #5:IN:0:OUT:0
+SENSOR #6:IN:0:OUT:0
+
+Log Entry : 12:13:29 PM Sunday, August 13, 2017 Received 4bytes
+[0x76] [expected 0xC5][0x78] [expected 0xC5][0x63] [expected 0xC5][0x76] [expected 0xC5]
+
+SENSOR #1:IN:0:OUT:0
+SENSOR #2:IN:0:OUT:0
+SENSOR #3:IN:0:OUT:0
+SENSOR #4:IN:0:OUT:0
+SENSOR #5:IN:0:OUT:0
+SENSOR #6:IN:0:OUT:0
+
+Log Entry : 12:13:29 PM Sunday, August 13, 2017 Received 3bytes
+[0x78] [expected 0xC5][0x76] [expected 0xC5][0x76] [expected 0xC5]
+
+SENSOR #1:IN:0:OUT:0
+SENSOR #2:IN:0:OUT:0
+SENSOR #3:IN:0:OUT:0
+SENSOR #4:IN:0:OUT:0
+SENSOR #5:IN:0:OUT:0
+SENSOR #6:IN:0:OUT:0
+
+Log Entry : 12:13:29 PM Sunday, August 13, 2017 Received 3bytes
+[0x78] [expected 0xC5][0x63] [expected 0xC5][0x76] [expected 0xC5]
+
+SENSOR #1:IN:0:OUT:0
+SENSOR #2:IN:0:OUT:0
+SENSOR #3:IN:0:OUT:0
+SENSOR #4:IN:0:OUT:0
+SENSOR #5:IN:0:OUT:0
+SENSOR #6:IN:0:OUT:0
+
+Log Entry : 12:13:29 PM Sunday, August 13, 2017 Received 1bytes
+[0x78] [expected 0xC5]
+
+SENSOR #1:IN:0:OUT:0
+SENSOR #2:IN:0:OUT:0
+SENSOR #3:IN:0:OUT:0
+SENSOR #4:IN:0:OUT:0
+SENSOR #5:IN:0:OUT:0
+SENSOR #6:IN:0:OUT:0
+
+Log Entry : 12:13:30 PM Sunday, August 13, 2017 Received 5bytes
+[0x76] [expected 0xC5][0x76] [expected 0xC5][0x78] [expected 0xC5][0x63] [expected 0xC5][0x76] [expected 0xC5]
+
+SENSOR #1:IN:0:OUT:0
+SENSOR #2:IN:0:OUT:0
+SENSOR #3:IN:0:OUT:0
+SENSOR #4:IN:0:OUT:0
+SENSOR #5:IN:0:OUT:0
+SENSOR #6:IN:0:OUT:0
+
+Log Entry : 12:13:30 PM Sunday, August 13, 2017 Received 2bytes
+[0x78] [expected 0xC5][0x76] [expected 0xC5]
+
+SENSOR #1:IN:0:OUT:0
+SENSOR #2:IN:0:OUT:0
+SENSOR #3:IN:0:OUT:0
+SENSOR #4:IN:0:OUT:0
+SENSOR #5:IN:0:OUT:0
+SENSOR #6:IN:0:OUT:0
+
+Log Entry : 12:13:30 PM Sunday, August 13, 2017 Received 4bytes
+[0x76] [expected 0xC5][0x78] [expected 0xC5][0x63] [expected 0xC5][0x76] [expected 0xC5]
+
+SENSOR #1:IN:0:OUT:0
+SENSOR #2:IN:0:OUT:0
+SENSOR #3:IN:0:OUT:0
+SENSOR #4:IN:0:OUT:0
+SENSOR #5:IN:0:OUT:0
+SENSOR #6:IN:0:OUT:0
+
+Log Entry : 12:13:30 PM Sunday, August 13, 2017 Received 1bytes
+[0x78] [expected 0xC5]
+
+SENSOR #1:IN:0:OUT:0
+SENSOR #2:IN:0:OUT:0
+SENSOR #3:IN:0:OUT:0
+SENSOR #4:IN:0:OUT:0
+SENSOR #5:IN:0:OUT:0
+SENSOR #6:IN:0:OUT:0
+
+Log Entry : 12:13:30 PM Sunday, August 13, 2017 Received 5bytes
+[0x76] [expected 0xC5][0x76] [expected 0xC5][0x78] [expected 0xC5][0x63] [expected 0xC5][0x76] [expected 0xC5]
+
+SENSOR #1:IN:0:OUT:0
+SENSOR #2:IN:0:OUT:0
+SENSOR #3:IN:0:OUT:0
+SENSOR #4:IN:0:OUT:0
+SENSOR #5:IN:0:OUT:0
+SENSOR #6:IN:0:OUT:0
+
+Log Entry : 12:13:30 PM Sunday, August 13, 2017 Received 2bytes
+[0x78] [expected 0xC5][0x76] [expected 0xC5]
+
+SENSOR #1:IN:0:OUT:0
+SENSOR #2:IN:0:OUT:0
+SENSOR #3:IN:0:OUT:0
+SENSOR #4:IN:0:OUT:0
+SENSOR #5:IN:0:OUT:0
+SENSOR #6:IN:0:OUT:0
+
+Log Entry : 12:13:30 PM Sunday, August 13, 2017 Received 4bytes
+[0x76] [expected 0xC5][0x78] [expected 0xC5][0x63] [expected 0xC5][0x76] [expected 0xC5]
+
+SENSOR #1:IN:0:OUT:0
+SENSOR #2:IN:0:OUT:0
+SENSOR #3:IN:0:OUT:0
+SENSOR #4:IN:0:OUT:0
+SENSOR #5:IN:0:OUT:0
+SENSOR #6:IN:0:OUT:0
+
+Log Entry : 12:13:30 PM Sunday, August 13, 2017 Received 2bytes
+[0x78] [expected 0xC5][0x76] [expected 0xC5]
+
+SENSOR #1:IN:0:OUT:0
+SENSOR #2:IN:0:OUT:0
+SENSOR #3:IN:0:OUT:0
+SENSOR #4:IN:0:OUT:0
+SENSOR #5:IN:0:OUT:0
+SENSOR #6:IN:0:OUT:0
+
+Log Entry : 12:13:30 PM Sunday, August 13, 2017 Received 4bytes
+[0x76] [expected 0xC5][0x78] [expected 0xC5][0x63] [expected 0xC5][0x76] [expected 0xC5]
+
+SENSOR #1:IN:0:OUT:0
+SENSOR #2:IN:0:OUT:0
+SENSOR #3:IN:0:OUT:0
+SENSOR #4:IN:0:OUT:0
+SENSOR #5:IN:0:OUT:0
+SENSOR #6:IN:0:OUT:0

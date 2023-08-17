@@ -12,8 +12,8 @@ namespace ICU6_SerialTester
 {
     public partial class Sensor : UserControl
     {
-        int InCount = 0;
-        int OutCount = 0;
+        public int InCount = 0;
+        public int OutCount = 0;
 
         delegate void SetTextCallback();
 

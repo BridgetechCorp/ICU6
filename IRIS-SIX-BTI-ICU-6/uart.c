@@ -100,7 +100,7 @@ void InitUART1( void )
     //  U1BRG = (Fcy/(16*BaudRate))-1
     //  U1BRG = (37M/(16*9600))-1
     //  U1BRG = 240
-    U1BRG = 10;            // 60Mhz osc, 9600 Baud
+    U1BRG = 10;            // 60Mhz osc, 9600??? Baud (seems to be 115200)
 
     // Load all values in for U1STA SFR
     U1STAbits.UTXISEL1 = 0; //Bit15 Int when Char is transferred (1/2 config!)

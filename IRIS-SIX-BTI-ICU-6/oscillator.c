@@ -28,7 +28,8 @@ void InitOscillator( void )
   __builtin_write_OSCCONL(0x01); // initiate switch
 
  
-   while (OSCCONbits.COSC != 0b010) {} // Wait for Clock switch to occur
+  //TODO: put back 
+ // while (OSCCONbits.COSC != 0b010) {} // Wait for Clock switch to occur
  // while (OSCCONbits.LOCK != 1) {} // Wait for PLL to lock
 
    i=4;
